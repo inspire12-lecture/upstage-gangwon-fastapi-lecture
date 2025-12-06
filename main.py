@@ -5,11 +5,11 @@ from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
 from app.api.route.user_routers import router as user_router
 from app.exceptions import UserNotFoundError, EmailNotAllowedNameExistsError
-from app.logging import init_logging
+from app.logging import init_logging, create_logger
 
 app = FastAPI()
 init_logging()
-logger = logging.getLogger('error_handler')
+logger = create_logger('global_handler')
 
 @app.exception_handler(EmailNotAllowedNameExistsError)
 async def email_not_allowed_handler(request: Request, exc: EmailNotAllowedNameExistsError):
