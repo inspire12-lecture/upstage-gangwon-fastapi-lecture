@@ -1,17 +1,18 @@
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: backend-ingress
-#  namespace: gangwon
-#spec:
-#  rules:
-#  - host: gangwon.local
-#    http:
-#      paths:
-#      - path: /
-#        pathType: Prefix
-#        backend:
-#          service:
-#            name: backend
-#            port:
-#              number: 8880
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-ingress
+  namespace: gangwon
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: gangwon.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8880
