@@ -1,8 +1,6 @@
 import os
-
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
-
 from app.models.schemas.chat import ChatRequest
 
 load_dotenv()
@@ -18,17 +16,19 @@ class UpstageClient:
         )
 
     async def chat_streaming(self, message: ChatRequest):
-        stream = await self.client.chat.completions.create(
-            model="solar-pro2",
-            messages=[
-                {
-                    "role": "user",
-                    "content": message.prompt
-                }
-            ],
-            stream=True,
-        )
+        """스트리밍 채팅"""
+        params = {
+            "model": "solar-pro2",
+            "messages": [{"role": "user", "content": message.prompt}],
+            "stream": True,
+        }
+        
+        if message.tools:
+            params["tools"] = message.tools
+        
+        stream = await self.client.chat.completions.create(**params)
+        
         async for chunk in stream:
-            if chunk.choices[0].delta.content is not None:
+            if chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
 
