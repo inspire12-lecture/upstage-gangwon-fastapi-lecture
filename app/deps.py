@@ -6,6 +6,8 @@ from app.service.user_service import UserService
 from app.service.vector_service import VectorService
 from app.service.embedding_service import EmbeddingService
 from app.service.agent_service import AgentService
+from app.service.document_service import DocumentService
+from app.repository.client.upstage_client import UpstageClient
 
 
 def get_user_repository() -> UserRepository:
@@ -33,3 +35,11 @@ def get_user_service(user_repo: UserRepository = Depends(get_user_repository)) -
 
 def get_agent_service(vector_service: VectorService = Depends(get_vector_service)) -> AgentService:
     return AgentService(vector_service=vector_service)
+
+
+def get_upstage_client() -> UpstageClient:
+    return UpstageClient()
+
+
+def get_document_service(upstage_client: UpstageClient = Depends(get_upstage_client)) -> DocumentService:
+    return DocumentService(upstage_client=upstage_client)

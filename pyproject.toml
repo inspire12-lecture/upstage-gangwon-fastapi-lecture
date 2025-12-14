@@ -14,6 +14,15 @@ dependencies = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
     "pytest-mock>=3.12.0",
+    # 파일 처리 관련
+    "python-multipart>=0.0.6",
+    "PyPDF2>=3.0.0",
+    "pdfplumber>=0.9.0",
+    "python-docx>=0.8.11",
+    # 웹 크롤링 관련
+    "beautifulsoup4>=4.12.0",
+    "requests>=2.31.0",
+    "aiohttp>=3.8.0",
 ]
 
 [tool.pytest.ini_options]
