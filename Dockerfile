@@ -54,5 +54,4 @@ USER appuser
 
 EXPOSE 8800
 
-# uv 안 쓰고, venv의 python으로 바로 실행 (가장 단순/안정)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8880"]

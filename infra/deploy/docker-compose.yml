@@ -16,10 +16,10 @@ services:
     restart: unless-stopped
 
   backend:
-    image: upstage-gangwon-backend:latest
+    image: upstage-gangwon-backend:lite
     container_name: upstage-gangwon-backend
     ports:
-      - "8800:8800"
+      - "8880:8880"
     environment:
       - UPSTAGE_API_KEY=${UPSTAGE_API_KEY}
       - CHROMA_HOST=${CHROMA_HOST}
