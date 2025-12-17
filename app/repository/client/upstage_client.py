@@ -1,26 +1,33 @@
 import os
-from typing import List
 
-from openai import OpenAI
+from dotenv import load_dotenv
+from openai import AsyncOpenAI
 
+from app.models.schemas.chat import ChatRequest
+
+load_dotenv()
 
 class UpstageClient:
-
     def __init__(self):
-        api_key = os.getenv("UPSTAGE_API_KEY")
-        if not api_key:
+        self.api_key = os.getenv("UPSTAGE_API_KEY")
+        if not self.api_key:
             raise ValueError("UPSTAGE_API_KEY environment variable is required")
-        self.client = OpenAI(api_key=api_key, base_url="https://api.upstage.ai/v1")
+        self.client = AsyncOpenAI(
+            api_key=self.api_key,
+            base_url="https://api.upstage.ai/v1"
+        )
 
-    def create_embeddings(self, texts: List[str]) -> List[List[float]]:
-        try:
-            response = self.client.embeddings.create(
-                model="solar-embedding-1-large-query",
-                input=texts
-            )
-            return [embedding.embedding for embedding in response.data]
-        except Exception as e:
-            raise RuntimeError(f"Failed to create embeddings: {str(e)}")
-
-    def create_embedding(self, text: str) -> List[float]:
-        return self.create_embeddings([text])[0]
+    async def chat_streaming(self, message: ChatRequest):
+        stream = await self.client.chat.completions.create(
+            model="solar-pro2",
+            messages=[
+                {
+                    "role": "user",
+                    "content": message.prompt
+                }
+            ],
+            stream=True,
+        )
+        async for chunk in stream:
+            if chunk.choices[0].delta.content is not None:
+                yield chunk.choices[0].delta.content

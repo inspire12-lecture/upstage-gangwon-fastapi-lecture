@@ -1659,6 +1659,19 @@ wheels = [
 ]
 
 [[package]]
+name = "sse-starlette"
+version = "3.0.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "starlette" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/17/8b/54651ad49bce99a50fd61a7f19c2b6a79fbb072e693101fbb1194c362054/sse_starlette-3.0.4.tar.gz", hash = "sha256:5e34286862e96ead0eb70f5ddd0bd21ab1f6473a8f44419dd267f431611383dd", size = 22576, upload-time = "2025-12-14T16:22:52.493Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/71/22/8ab1066358601163e1ac732837adba3672f703818f693e179b24e0d3b65c/sse_starlette-3.0.4-py3-none-any.whl", hash = "sha256:32c80ef0d04506ced4b0b6ab8fe300925edc37d26f666afb1874c754895f5dc3", size = 11764, upload-time = "2025-12-14T16:22:51.453Z" },
+]
+
+[[package]]
 name = "starlette"
 version = "0.50.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1792,13 +1805,14 @@ dependencies = [
     { name = "pytest-asyncio" },
     { name = "pytest-mock" },
     { name = "python-dotenv" },
+    { name = "sse-starlette" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "chromadb", specifier = ">=0.4.0" },
-    { name = "fastapi", specifier = ">=0.122.0" },
+    { name = "fastapi", specifier = ">=0.123.2" },
     { name = "httpx", specifier = "==0.27.1" },
     { name = "openai", specifier = "==1.52.2" },
     { name = "pydantic", specifier = ">=2.0.0" },
@@ -1806,6 +1820,8 @@ requires-dist = [
     { name = "pytest-asyncio", specifier = ">=0.23.0" },
     { name = "pytest-mock", specifier = ">=3.12.0" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "sse-starlette", specifier = ">=3.0.3" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.38.0" },
 ]
 

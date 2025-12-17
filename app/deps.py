@@ -6,6 +6,11 @@ from app.service.user_service import UserService
 from app.service.vector_service import VectorService
 from app.service.embedding_service import EmbeddingService
 from app.service.agent_service import AgentService
+from app.repository.client.upstage_client import UpstageClient
+from app.service.chat_service import ChatService
+from fastapi import Depends
+
+upstage_client = UpstageClient()
 
 
 def get_user_repository() -> UserRepository:
@@ -21,8 +26,8 @@ def get_embedding_service() -> EmbeddingService:
 
 
 def get_vector_service(
-    vector_repo: VectorRepository = Depends(get_vector_repository),
-    embedding_service: EmbeddingService = Depends(get_embedding_service)
+        vector_repo: VectorRepository = Depends(get_vector_repository),
+        embedding_service: EmbeddingService = Depends(get_embedding_service)
 ) -> VectorService:
     return VectorService(vector_repository=vector_repo, embedding_service=embedding_service)
 
@@ -33,3 +38,11 @@ def get_user_service(user_repo: UserRepository = Depends(get_user_repository)) -
 
 def get_agent_service(vector_service: VectorService = Depends(get_vector_service)) -> AgentService:
     return AgentService(vector_service=vector_service)
+
+
+def get_upstage_client() -> UpstageClient:
+    return upstage_client
+
+
+def get_chat_service(upstage_client: UpstageClient = Depends(get_upstage_client)) -> ChatService:
+    return ChatService(upstage_client)
