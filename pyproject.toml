@@ -12,6 +12,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=9.0.1",
+    "ruff>=0.14.10",
 ]
 [tool.ruff]
 line-length = 88
