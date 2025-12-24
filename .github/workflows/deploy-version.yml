@@ -46,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          IMAGE_NAME="ghcr.io/inspire12/upstage-gangwon-fastapi-lecture"
+          IMAGE_NAME="ghcr.io/inspire12-lecture/upstage-gangwon-fastapi-lecture"
           VERSION_TAG="${{ steps.version.outputs.version_tag }}"
 
           docker buildx build \
@@ -68,7 +68,7 @@ jobs:
 
             cd /home/ubuntu/deploy/upstage-gangwon-fastapi-lecture/infra/k8s/application
 
-            sed -i "s|image: ghcr.io/inspire12/upstage-gangwon-fastapi-lecture:.*|image: ghcr.io/inspire12/upstage-gangwon-fastapi-lecture:${VERSION_TAG}|g" 04-backend.yaml
+            sed -i "s|image: ghcr.io/inspire12-lecture/upstage-gangwon-fastapi-lecture:.*|image: ghcr.io/inspire12-lecture/upstage-gangwon-fastapi-lecture:${VERSION_TAG}|g" 04-backend.yaml
             sed -i "s|value: \".*\"|value: \"${VERSION_TAG}\"|g" 04-backend.yaml
 
             kubectl apply -f 04-backend.yaml
