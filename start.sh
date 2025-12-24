@@ -29,4 +29,4 @@ echo $! > app.pid
 
 echo "FastAPI server started with PID: $(cat app.pid)"
 echo "Logs: tail -f app.log"
-echo "Health check: curl http://localhost:8000/hello"
+echo "Health check: curl http://localhost:8880/hello"
