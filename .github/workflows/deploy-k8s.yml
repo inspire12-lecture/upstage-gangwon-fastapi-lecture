@@ -30,7 +30,7 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
-            -t ghcr.io/${{ github.actor }}/$(basename ${{ github.repository }}):latest \
+            -t ghcr.io/${{ github.repository }}:latest \
             --push .
 
       - name: Deploy on EC2
