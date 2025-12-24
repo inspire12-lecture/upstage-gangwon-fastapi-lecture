@@ -43,14 +43,12 @@ jobs:
             set -e
             BRANCH="${{ github.ref_name }}"
             cd /home/ubuntu/workspace/deploy/upstage-gangwon-fastapi-lecture
-            
-          # 원격 브랜치 가져오기 및 체크아웃
+            # 원격 브랜치 가져오기 및 체크아웃
             git fetch origin "$BRANCH"
             git checkout "$BRANCH"
             git pull origin "$BRANCH"
-                    
-            # 2. k8s manifest 위치로 이동
+
+            # k8s manifest 위치로 이동
             cd infra/k8s/application
-            
-            # 3. 배포
+            # 배포
             kubectl apply -f 04-backend.yaml
