@@ -42,7 +42,7 @@ jobs:
           script: |
             set -e
             
-            cd /home/ubuntu/deploy/upstage-gangwon-fastapi-lecture
+            cd /home/ubuntu/workspace/deploy/upstage-gangwon-fastapi-lecture
             
             # 1. 최신 브랜치로 이동
             git fetch origin
