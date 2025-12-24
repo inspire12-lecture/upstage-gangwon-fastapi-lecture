@@ -41,14 +41,14 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-            
+            BRANCH="${{ github.ref_name }}"
             cd /home/ubuntu/workspace/deploy/upstage-gangwon-fastapi-lecture
             
-            # 1. 최신 브랜치로 이동
-            git fetch origin
-            git checkout deploy/registry
-            git pull origin deploy/registry
-            
+          # 원격 브랜치 가져오기 및 체크아웃
+            git fetch origin "$BRANCH"
+            git checkout "$BRANCH"
+            git pull origin "$BRANCH"
+                    
             # 2. k8s manifest 위치로 이동
             cd infra/k8s/application
             
