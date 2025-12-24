@@ -22,11 +22,11 @@ uv sync
 
 # 새 서버 시작
 echo "Starting FastAPI server..."
-nohup uv run uvicorn main:app --host 0.0.0.0 --port 8000 > app.log 2>&1 &
+nohup uv run uvicorn main:app --host 0.0.0.0 --port 8880 > app.log 2>&1 &
 
 # 프로세스 ID 저장
 echo $! > app.pid
 
 echo "FastAPI server started with PID: $(cat app.pid)"
 echo "Logs: tail -f app.log"
-echo "Health check: curl http://localhost:8000/hello"
+echo "Health check: curl http://localhost:8880/hello"
